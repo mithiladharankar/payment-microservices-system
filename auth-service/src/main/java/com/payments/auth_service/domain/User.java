@@ -1,10 +1,16 @@
 package com.payments.auth_service.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.Instant;
 
 @Entity
 @Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -15,16 +21,14 @@ public class User {
     private String username;
 
     @Column(nullable = false)
-    private String password; // encoded
+    private String password;
 
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private String roles; // e.g. "ROLE_USER"
+    private String roles;
 
-    @Column(nullable = false)
+    @Builder.Default
     private Instant createdAt = Instant.now();
-
-    // getters and setters
 }
